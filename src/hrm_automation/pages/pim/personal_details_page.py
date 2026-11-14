@@ -6,6 +6,7 @@ Encapsulates /web/index.php/pim/viewPersonalDetails/empNumber/{id}.
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
+from config.settings import settings
 from hrm_automation.components.dropdown import DropdownComponent
 from hrm_automation.components.toast import ToastComponent
 from hrm_automation.core.base_page import BasePage
@@ -41,6 +42,14 @@ class PersonalDetailsPage(BasePage):
         super().__init__(driver)
         self.toast = ToastComponent(driver)
         self.dropdown = DropdownComponent(driver)
+
+    def navigate_to_details(self, emp_number: str) -> "PersonalDetailsPage":
+        """Navigate directly to personal details view for given employee number."""
+        url = f"{settings.base_url}/web/index.php/pim/viewPersonalDetails/empNumber/{emp_number}"
+        logger.info(f"Navigating to employee personal details: {url}")
+        self.open_url(url)
+        self.wait_for_page_readiness()
+        return self
 
     def is_loaded(self, timeout: int = 15) -> bool:
         """Verify the personal details view has loaded."""

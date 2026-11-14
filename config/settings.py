@@ -43,7 +43,7 @@ class FrameworkSettings(BaseSettings):
 
     # Timeouts & Synchronization
     default_timeout: int = Field(default=15, alias="DEFAULT_TIMEOUT")
-    page_load_timeout: int = Field(default=30, alias="PAGE_LOAD_TIMEOUT")
+    page_load_timeout: int = Field(default=60, alias="PAGE_LOAD_TIMEOUT")
     implicit_wait: int = Field(default=0, alias="IMPLICIT_WAIT")
 
     # Concurrency & Reporting

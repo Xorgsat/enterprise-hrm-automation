@@ -32,7 +32,7 @@ class LoginPage(BasePage):
         """Navigate to the login view and await readiness."""
         logger.info(f"Navigating to login page: {self.login_url}")
         self.open_url(self.login_url)
-        self.wait.wait_for_visibility(self.USERNAME_INPUT)
+        self.wait.wait_for_visibility(self.USERNAME_INPUT, timeout=25)
         return self
 
     def is_on_login_page(self) -> bool:

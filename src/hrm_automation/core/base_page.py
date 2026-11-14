@@ -52,13 +52,12 @@ class BasePage:
             self.driver.get(url)
         except Exception as e:
             logger.warning(
-                f"Initial navigation to {url} timed out or failed: {e}. Retrying navigation."
+                f"Initial navigation to {url} hit timeout/warning ({e}); proceeding to explicit DOM wait."
             )
             try:
                 self.driver.execute_script("window.stop();")
             except Exception:
                 pass
-            self.driver.get(url)
         self.wait_for_page_readiness()
 
     def wait_for_page_readiness(self) -> None:

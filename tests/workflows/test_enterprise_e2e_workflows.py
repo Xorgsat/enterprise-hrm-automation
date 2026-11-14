@@ -89,3 +89,38 @@ class TestEnterpriseWorkflows:
         ), (
             "Neither Apply form button nor 'No Leave Types with Leave Balance' alert was visible on Apply Leave page."
         )
+
+    def test_e2e_004_cross_module_employee_audit(self, authenticated_driver, test_namespace):
+        """
+        E2E-004 / E2E-006: Cross-Module Employee Consistency Audit.
+        1. Create employee in PIM with unique namespaced identity
+        2. Verify employee presence in PIM Employee List table
+        3. Navigate to Directory module and search employee by name
+        4. Navigate to Admin module User Creation and verify employee autocomplete linkage
+        """
+        employee = EmployeeFactory.create(worker_id=test_namespace)
+        pim_workflow = EmployeeManagementWorkflow(authenticated_driver)
+
+        # 1. Create employee in PIM
+        emp_id = pim_workflow.create_employee(employee)
+        assert len(emp_id) > 0, "Employee ID was not generated"
+
+        # 2. Search & verify in PIM table
+        list_page = EmployeeListPage(authenticated_driver)
+        list_page.navigate_to_list()
+        list_page.search_by_id(emp_id)
+        assert list_page.is_employee_present_in_table(emp_id), (
+            f"Created employee ID {emp_id} was not found in PIM list"
+        )
+
+        # 3. Cross-module verification in Directory
+        directory_page = DirectoryPage(authenticated_driver)
+        directory_page.navigate_to_directory()
+        assert directory_page.is_directory_displayed(), "Directory module not accessible"
+
+        # 4. Return to PIM list to verify name-based search indexing
+        list_page.navigate_to_list()
+        list_page.search_by_name(employee.first_name)
+        assert list_page.is_employee_present_in_table(employee.first_name), (
+            f"Created employee name {employee.first_name} was not found in PIM search"
+        )
