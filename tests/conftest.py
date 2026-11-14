@@ -18,6 +18,16 @@ from hrm_automation.utilities.screenshots import capture_screenshot
 logger = get_logger(__name__)
 
 
+def pytest_addoption(parser):
+    """Register custom command-line flags."""
+    parser.addoption(
+        "--headed",
+        action="store_true",
+        default=False,
+        help="Run browser tests in headed (visible GUI) mode.",
+    )
+
+
 def pytest_configure(config):
     """Initialize logging and worker namespaces before test run starts."""
     worker_id = os.environ.get("PYTEST_XDIST_WORKER", "master")
@@ -53,7 +63,13 @@ def driver(request, env_settings):
     Automatically captures screenshot on test failure.
     """
     logger.info(f"Starting browser session for test: '{request.node.name}'")
-    web_driver = DriverFactory.create_driver(config=env_settings)
+    is_headed = (
+        request.config.getoption("--headed")
+        or os.environ.get("HEADED", "").lower() in ("true", "1")
+        or os.environ.get("HEADLESS", "").lower() in ("false", "0")
+    )
+    headless = False if is_headed else env_settings.headless
+    web_driver = DriverFactory.create_driver(headless=headless, config=env_settings)
 
     # Store driver on test node so pytest hooks can access it for failure diagnostics
     request.node.driver = web_driver

@@ -17,19 +17,24 @@ class DriverFactory:
     """Factory for creating and configuring isolated WebDriver sessions."""
 
     @staticmethod
-    def create_driver(config: FrameworkSettings | None = None) -> WebDriver:
+    def create_driver(
+        headless: bool | None = None,
+        browser: str | None = None,
+        config: FrameworkSettings | None = None,
+    ) -> WebDriver:
         """Create and return a configured WebDriver instance based on framework settings."""
         cfg = config or settings
-        browser_name = cfg.browser.lower()
+        browser_name = (browser or cfg.browser).lower()
+        is_headless = headless if headless is not None else cfg.headless
 
         logger.info(
-            f"Initializing WebDriver: browser='{browser_name}', headless={cfg.headless}, "
+            f"Initializing WebDriver: browser='{browser_name}', headless={is_headless}, "
             f"target='{cfg.base_url}'"
         )
 
         if browser_name == "chrome":
             options = ChromeOptions()
-            if cfg.headless:
+            if is_headless:
                 options.add_argument("--headless=new")
 
             # Production-grade flags for container and headless stability
