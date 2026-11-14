@@ -38,6 +38,10 @@ venv.bak/
 *.pem
 *.key
 
+# Local Developer Run Guides & Launch Commands
+LAUNCH_COMMANDS.md
+*.local.md
+
 # Pytest & Test Execution
 .pytest_cache/
 .tox/
