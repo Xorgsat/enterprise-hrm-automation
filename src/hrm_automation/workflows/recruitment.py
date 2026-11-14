@@ -31,6 +31,10 @@ class RecruitmentWorkflow:
 
         # Wait for candidate profile or return to candidates list
         self.add_page.wait_for_page_readiness()
+        try:
+            self.add_page.wait.wait_for_url_contains("/recruitment/addCandidate/", timeout=15)
+        except Exception:
+            pass
 
     def create_and_verify_candidate(self, candidate: CandidateData) -> bool:
         """Create candidate and verify presence in search table."""

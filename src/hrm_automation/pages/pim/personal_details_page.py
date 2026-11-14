@@ -90,12 +90,23 @@ class PersonalDetailsPage(BasePage):
         self.type_text(self.OTHER_ID, new_other_id, clear_first=True)
         self.click_save()
 
-    def get_other_id(self) -> str:
-        """Get Other ID input value."""
+    def get_other_id(self, timeout: int = 10) -> str:
+        """Get Other ID input value once asynchronous hydration completes."""
+        self.wait_for_page_readiness()
+        try:
+            self.wait._get_wait(timeout).until(
+                lambda d: (self.get_attribute(self.OTHER_ID, "value") or "").strip() != ""
+            )
+        except Exception:
+            pass
         return self.get_attribute(self.OTHER_ID, "value") or ""
 
     def click_save(self) -> None:
         """Click the first Save button for Personal Details."""
         logger.info("Saving Personal Details changes.")
         self.click(self.SAVE_BUTTON)
+        try:
+            self.toast.is_toast_displayed(timeout=6)
+        except Exception:
+            pass
         self.wait_for_page_readiness()

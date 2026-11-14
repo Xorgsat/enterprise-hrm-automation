@@ -70,21 +70,21 @@ class TestPIM:
         )
 
     def test_pim_005_modify_employee_details(self, authenticated_driver, test_namespace):
-        """PIM-005 & PIM-006: Modify employee nickname and verify persistence."""
+        """PIM-005 & PIM-006: Modify employee other ID and verify persistence."""
         employee = EmployeeFactory.create(worker_id=test_namespace)
         workflow = EmployeeManagementWorkflow(authenticated_driver)
         workflow.create_employee(employee)
 
         details_page = PersonalDetailsPage(authenticated_driver)
-        updated_nickname = f"Upd_{employee.nickname}"
-        details_page.update_nickname(updated_nickname)
+        updated_other_id = f"OID_{test_namespace[:10]}"
+        details_page.update_other_id(updated_other_id)
 
         # Refresh page to verify database persistence
         authenticated_driver.refresh()
         details_page.wait_for_page_readiness()
 
-        assert details_page.get_nickname() == updated_nickname, (
-            f"Expected updated nickname '{updated_nickname}', found '{details_page.get_nickname()}'"
+        assert details_page.get_other_id() == updated_other_id, (
+            f"Expected updated other ID '{updated_other_id}', found '{details_page.get_other_id()}'"
         )
 
     @pytest.mark.negative
