@@ -1,0 +1,235 @@
+{
+  "login": {
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    "title": "OrangeHRM",
+    "username_name": "username",
+    "username_placeholder": "Username",
+    "password_name": "password",
+    "password_placeholder": "Password",
+    "button_type": "submit",
+    "button_text": "Login",
+    "credentials_hint": "Username : Admin\nPassword : admin123"
+  },
+  "dashboard": {
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
+    "user_name": "awil hussein",
+    "footer": "OrangeHRM OS 5.9 | \u00a9 2005 - 2026 OrangeHRM, Inc. All rights reserved.",
+    "menu_items": [
+      {
+        "name": "Admin",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewAdminModule"
+      },
+      {
+        "name": "PIM",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPimModule"
+      },
+      {
+        "name": "Leave",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveModule"
+      },
+      {
+        "name": "Time",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/time/viewTimeModule"
+      },
+      {
+        "name": "Recruitment",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewRecruitmentModule"
+      },
+      {
+        "name": "My Info",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewMyDetails"
+      },
+      {
+        "name": "Performance",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/performance/viewPerformanceModule"
+      },
+      {
+        "name": "Dashboard",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"
+      },
+      {
+        "name": "Directory",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory"
+      },
+      {
+        "name": "Maintenance",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/maintenance/viewMaintenanceModule"
+      },
+      {
+        "name": "Claim",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/claim/viewClaimModule"
+      },
+      {
+        "name": "Buzz",
+        "href": "https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz"
+      }
+    ]
+  },
+  "modules": {
+    "Admin": {
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers",
+      "breadcrumb": [
+        "Admin",
+        "User Management"
+      ],
+      "tabs": [
+        "User Management",
+        "Job",
+        "Organization",
+        "Qualifications",
+        "Nationalities",
+        "Corporate Branding",
+        "Configuration"
+      ],
+      "buttons": [
+        "Upgrade",
+        "Reset",
+        "Search",
+        "Add"
+      ],
+      "table_columns": [
+        "Username",
+        "User Role",
+        "Employee Name",
+        "Status",
+        "Actions"
+      ],
+      "inputs_count": 2,
+      "dropdowns_count": 2
+    },
+    "PIM": {
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList",
+      "breadcrumb": [
+        "PIM"
+      ],
+      "tabs": [
+        "Configuration",
+        "Employee List",
+        "Add Employee",
+        "Reports"
+      ],
+      "buttons": [
+        "Upgrade",
+        "Reset",
+        "Search",
+        "Add",
+        "1",
+        "2",
+        "3"
+      ],
+      "table_columns": [
+        "Id",
+        "First (& Middle) Name",
+        "Last Name",
+        "Job Title",
+        "Employment Status",
+        "Sub Unit",
+        "Supervisor",
+        "Actions"
+      ],
+      "inputs_count": 2,
+      "dropdowns_count": 4
+    },
+    "Leave": {
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveList",
+      "breadcrumb": [
+        "Leave"
+      ],
+      "tabs": [
+        "Apply",
+        "My Leave",
+        "Entitlements",
+        "Reports",
+        "Configure",
+        "Leave List",
+        "Assign Leave"
+      ],
+      "buttons": [
+        "Upgrade",
+        "Reset",
+        "Search",
+        "Approve",
+        "Reject",
+        "Approve",
+        "Reject",
+        "Approve",
+        "Reject"
+      ],
+      "table_columns": [
+        "Date",
+        "Employee Name",
+        "Leave Type",
+        "Leave Balance (Days)",
+        "Number of Days",
+        "Status",
+        "Comments",
+        "Actions"
+      ],
+      "inputs_count": 3,
+      "dropdowns_count": 2
+    },
+    "Recruitment": {
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates",
+      "breadcrumb": [
+        "Recruitment"
+      ],
+      "tabs": [
+        "Candidates",
+        "Vacancies"
+      ],
+      "buttons": [
+        "Upgrade",
+        "Reset",
+        "Search",
+        "Add"
+      ],
+      "table_columns": [
+        "Vacancy",
+        "Candidate",
+        "Hiring Manager",
+        "Date of Application",
+        "Status",
+        "Actions"
+      ],
+      "inputs_count": 4,
+      "dropdowns_count": 5
+    },
+    "My Info": {
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPersonalDetails/empNumber/7",
+      "breadcrumb": [
+        "PIM"
+      ],
+      "tabs": [],
+      "buttons": [
+        "Upgrade",
+        "Save",
+        "Save",
+        "Add"
+      ],
+      "table_columns": [
+        "File Name",
+        "Description",
+        "Size",
+        "Type",
+        "Date Added",
+        "Added By",
+        "Actions"
+      ],
+      "inputs_count": 10,
+      "dropdowns_count": 3
+    },
+    "Directory": {
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory",
+      "breadcrumb": [],
+      "tabs": [],
+      "buttons": [],
+      "table_columns": [],
+      "inputs_count": 1,
+      "dropdowns_count": 2
+    }
+  },
+  "logout": {
+    "final_url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    "success": true
+  }
+}

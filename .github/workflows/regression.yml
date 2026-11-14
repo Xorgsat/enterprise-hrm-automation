@@ -1,0 +1,79 @@
+name: Full Regression Suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target Execution Environment"
+        required: true
+        default: "demo"
+        type: choice
+        options:
+          - demo
+          - local
+          - staging
+      workers:
+        description: "Parallel Concurrency Workers (-n)"
+        required: false
+        default: "2"
+      marker:
+        description: "Pytest Marker Filter"
+        required: false
+        default: "not slow"
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  regression-execution:
+    name: Regression Execution
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Google Chrome Stable
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Full Regression
+        env:
+          ENVIRONMENT: ${{ inputs.environment || 'demo' }}
+          BASE_URL: ${{ secrets.BASE_URL || 'https://opensource-demo.orangehrmlive.com' }}
+          ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME || 'Admin' }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD || 'admin123' }}
+          HEADLESS: "true"
+          WORKERS: ${{ inputs.workers || '2' }}
+        run: |
+          pytest -n ${{ inputs.workers || '2' }} -v \
+            --junitxml=reports/junit/regression-results.xml \
+            --alluredir=reports/allure-results
+
+      - name: Archive Allure & Failure Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-execution-artifacts
+          path: |
+            reports/junit/
+            reports/allure-results/
+            artifacts/screenshots/
+            logs/
+          retention-days: 30

@@ -1,0 +1,26 @@
+{
+  "empty_login_errors": [
+    "Required",
+    "Required"
+  ],
+  "invalid_login_alert": "Invalid credentials",
+  "add_employee_form": {
+    "first_name_name": "firstName",
+    "middle_name_name": "middleName",
+    "last_name_name": "lastName",
+    "emp_id_default": "0425",
+    "has_login_switch": true
+  },
+  "employee_list": {
+    "records_text": "N/A"
+  },
+  "apply_leave_form": {
+    "dropdowns": 1,
+    "date_inputs": 2
+  },
+  "add_candidate_form": {
+    "first_name": "firstName",
+    "last_name": "lastName",
+    "email_found": true
+  }
+}

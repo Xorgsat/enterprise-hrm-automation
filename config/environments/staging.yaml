@@ -1,0 +1,20 @@
+name: staging
+base_url: https://staging-hrm.internal
+edition: OrangeHRM OS Enterprise Staging
+is_shared_demo: false
+allow_destructive_tests: true
+max_parallel_workers: 4
+default_timeout: 12
+page_load_timeout: 25
+implicit_wait: 0
+credentials:
+  admin_username: Admin
+  admin_password: admin123
+features:
+  user_management: true
+  employee_management: true
+  leave_application: true
+  leave_approval: true
+  candidate_recruitment: true
+  employee_self_service: true
+  database_direct_access: false
